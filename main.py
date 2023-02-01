@@ -9,7 +9,7 @@ COH = COH()
 Profit= Profit()
 
 #Use with to open the file and include the parameters (mode,encoding)
-with open("Final report.txt", "w") as file:
+with open("Summary report.txt", "w") as file:
   #Use write() function to write into the txt file
   file.write(f"{Overheads}\n{COH}\n{Profit}")
 file.close()
