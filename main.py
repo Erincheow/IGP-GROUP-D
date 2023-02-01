@@ -1,21 +1,18 @@
-from pathlib import Path
+#Import the python files for cash_on_hand, overheads and profit_loss
 from cash_on_hand import COH
 from overheads import Overheads
 from profit_loss import Profit
-# instantiate an file path object to home directory
-home = Path.home()
-#create a new file_path and extend it to 'IGP' and create a new file 'final_report.txt'
-file_path = home/"IGP"/"Final report.txt" 
-# print(file_path.exists()) # Check the file exists before proceeding to open file
- 
-Overheads = Overheads() 
+
+#Create 3 variables to store the three different functions
+Overheads = Overheads()
 COH = COH()
 Profit= Profit()
-#Use with to open the file and include the parameters (mode,encoding)
-with file_path.open(mode= "w", encoding= "UTF-8") as file:
-    #Write the values
-    file.write(f"{Overheads}\n{COH}\n{Profit}")
 
-file.close() #Close the file
+#Use with to open the file and include the parameters (mode,encoding)
+with open("Final report.txt", "w") as file:
+  #Use write() function to write into the txt file
+  file.write(f"{Overheads}\n{COH}\n{Profit}")
+file.close()
+#Close the file
 
 

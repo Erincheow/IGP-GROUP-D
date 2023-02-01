@@ -1,27 +1,35 @@
-from pathlib import Path
 # Import csv module
 import csv
-file_path = Path.home()/"IGP"/"Python folder"/"Csv folder"/"Cash on Hand.csv"
-# read the csv file to append days and cash on hand values from the csv.
-with file_path.open(mode = "r",encoding = "UTF-8-sig", newline="") as csvfile:
-        reader = list(csv.reader(csvfile,delimiter=","))
-        reader = reader[1:]
-# instantiate a reader object
+#Import os library
+import os
+
 def COH():
-    Days= []
+    """
+    - function will determine whether the cash on hand across 5 Coh had surplus or deficit
+    """
+    #Use with open() and use os.path.join to join directory names to locate the files and read it
+    with open(os.path.join("Csv folder", "Cash on Hand.csv"), "r") as file:
+        # instantiate a reader object
+        reader = list(csv.reader(file))  
+        #Skip header
+        reader = reader[1:]
+    
+    Coh = [] #Create an empty list to store the days and cash on hand values
     for i, row in enumerate(reader):
-        Days.append([])
+        Coh.append([]) 
         for element in row:
-            Days[i].append(int(element))
-
+            Coh[i].append(int(element))
+    #Create an variable with an empty string and name it "output"
     output = ""
-
-    for i in range(1,len(Days)):  
-        if Days[i-1][1] > Days[i][1]:
-            output += f"[CASH DEFICIT] DAY: {Days[i][0]}, AMOUNT: USD{Days[i-1][1] - Days[i][1]}\n"
+    #To find the corresponding days with cash on hand deficit
+    for i in range(1,len(Coh)):  
+        if Coh[i-1][1] > Coh[i][1]:
+            output += f"[CASH DEFICIT] DAY: {Coh[i][0]}, AMOUNT: USD{Coh[i-1][1] - Coh[i][1]}\n"
+    #Check whether there is deficit for the corresponding days , if no cash deficit, will return cash surplus
     if output == "":
         return f"[CASH SURPLUS]CASH ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY"
     return output[:-1]
-    
+
+
 
    
